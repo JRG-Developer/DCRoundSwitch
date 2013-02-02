@@ -17,11 +17,10 @@
 @class DCRoundSwitchKnobLayer;
 
 @interface DCRoundSwitch : UIControl
-
-@property (nonatomic, retain) UIColor *onTintColor;		// default: blue (matches normal UISwitch)
-@property (nonatomic, getter=isOn) BOOL on;				// default: NO
-@property (nonatomic, copy) NSString *onText;			// default: 'ON' - automatically localized
-@property (nonatomic, copy) NSString *offText;			// default: 'OFF' - automatically localized
+@property (nonatomic, retain) UIColor *onTintColor UI_APPEARANCE_SELECTOR;		// default: blue (matches normal UISwitch)
+@property (nonatomic, getter=isOn) BOOL on;                                     // default: NO
+@property (nonatomic, copy) NSString *onText;                                   // default: 'ON' - automatically localized
+@property (nonatomic, copy) NSString *offText;                                  // default: 'OFF' - automatically localized
 
 + (Class)knobLayerClass;
 + (Class)outlineLayerClass;

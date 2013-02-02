@@ -21,18 +21,17 @@
 @property (nonatomic, retain) DCRoundSwitchKnobLayer *knobLayer;
 @property (nonatomic, retain) CAShapeLayer *clipLayer;
 @property (nonatomic, assign) BOOL ignoreTap;
-
 - (void)setup;
 - (void)useLayerMasking;
 - (void)removeLayerMask;
 - (void)positionLayersAndMask;
-
 @end
 
 @implementation DCRoundSwitch
 @synthesize outlineLayer, toggleLayer, knobLayer, clipLayer, ignoreTap;
 @synthesize on, onText, offText;
 @synthesize onTintColor;
+
 
 #pragma mark -
 #pragma mark Init & Memory Managment
@@ -96,6 +95,10 @@
 
 - (void)setup
 {
+    // If no onTintColor is set yet (through appearance proxy), set it to the default "blue" color
+    if (!self.onTintColor)
+        self.onTintColor = [UIColor colorWithRed:0.000 green:0.478 blue:0.882 alpha:1.0];
+    
 	// this way you can set the background color to black or something similar so it can be seen in IB
 	self.backgroundColor = [UIColor clearColor];
 
@@ -129,7 +132,7 @@
 	// this is the knob, and sits on top of the layer stack. note that the knob shadow is NOT drawn here, it is drawn on the
 	// toggleLayer so it doesn't bleed out over the outlineLayer.
 
-	self.toggleLayer = [[[[[self class] toggleLayerClass] alloc] initWithOnString:self.onText offString:self.offText onTintColor:[UIColor colorWithRed:0.000 green:0.478 blue:0.882 alpha:1.0]] autorelease];
+	self.toggleLayer = [[[[[self class] toggleLayerClass] alloc] initWithOnString:self.onText offString:self.offText onTintColor:self.onTintColor] autorelease];
 	self.toggleLayer.drawOnTint = NO;
 	self.toggleLayer.clip = YES;
 	[self.layer addSublayer:self.toggleLayer];
